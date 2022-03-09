@@ -14,7 +14,7 @@ public class MapNode : MonoBehaviour
     public int sShips;
     public int reward;
 
-    public GameObject selectRing;
+    private GameObject selectRing;
 
     public bool isClickable;
 
@@ -26,11 +26,18 @@ public class MapNode : MonoBehaviour
     {
         r = gameObject.GetComponent<Renderer>();
         isClickable = false;
+        selectRing = gameObject.transform.GetChild(0).gameObject;
+        selectRing.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GlobalVars.currentLayer == mapLayer){
+            isClickable = true;
+        } else {
+            isClickable = false;
+        }
         if(!isClickable){
             selectRing.SetActive(false);
             oc = r.material.GetColor("_Color");

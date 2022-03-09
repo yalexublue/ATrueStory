@@ -80,11 +80,11 @@ public class MapGenerator : MonoBehaviour
         if(l % upGap == 0 && l!=0){
             //is a single upgrade station
             mapLayers[l].mapNodes = new MapNode[1];
-            GenerateUpgradeNode(mapLayers[l], 0);
+            GenerateUpgradeNode(mapLayers[l], 0, l);
         }else if(l == (numLayers-1)){
             //is a single final battle node
             mapLayers[l].mapNodes = new MapNode[1];
-            GenerateBattleNode(mapLayers[l], 0);
+            GenerateBattleNode(mapLayers[l], 0, l);
         }else{
             float gentotal = battleWeight + shopWeight + upgradeWeight;
             //normal layer
@@ -94,29 +94,31 @@ public class MapGenerator : MonoBehaviour
                 float typeGen = Random.Range(0f, gentotal);
                 if(typeGen <= battleWeight){
                     //battlenode
-                    GenerateBattleNode(mapLayers[l], i);
+                    GenerateBattleNode(mapLayers[l], i, l);
                 }else if(typeGen < battleWeight+shopWeight){
                     //shopnnode
-                    GenerateShopNode(mapLayers[l], i);
+                    GenerateShopNode(mapLayers[l], i, l);
                 }else{
                     //upgradenode
-                    GenerateUpgradeNode(mapLayers[l], i);
+                    GenerateUpgradeNode(mapLayers[l], i, l);
                 }
             }
         }
     }
 
-    void GenerateUpgradeNode(MapLayer parentLayer, int layerIndex){
+    void GenerateUpgradeNode(MapLayer parentLayer, int layerIndex, int thisLayer){
         parentLayer.mapNodes[layerIndex] = Instantiate(mapNodePrefab);
         parentLayer.mapNodes[layerIndex].transform.parent = parentLayer.transform;
         parentLayer.mapNodes[layerIndex].nodeType = MapNode.NodeType.Upgrade;
         parentLayer.mapNodes[layerIndex].GetComponent<Renderer>().material.color = upgradeColor;
+        parentLayer.mapNodes[layerIndex].GetComponent<MapNode>().mapLayer = thisLayer;
     }
-    void GenerateBattleNode(MapLayer parentLayer, int layerIndex){
+    void GenerateBattleNode(MapLayer parentLayer, int layerIndex, int thisLayer){
         parentLayer.mapNodes[layerIndex] = Instantiate(mapNodePrefab);
         parentLayer.mapNodes[layerIndex].transform.parent = parentLayer.transform;
         parentLayer.mapNodes[layerIndex].nodeType = MapNode.NodeType.Battle;
         parentLayer.mapNodes[layerIndex].GetComponent<Renderer>().material.color = battleColor;
+        parentLayer.mapNodes[layerIndex].GetComponent<MapNode>().mapLayer = thisLayer;
         
         int battleScore = 0;
         int targetScore = Mathf.FloorToInt(cDifficulty * 4.5f);
@@ -136,10 +138,11 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
-    void GenerateShopNode(MapLayer parentLayer, int layerIndex){
+    void GenerateShopNode(MapLayer parentLayer, int layerIndex, int thisLayer){
         parentLayer.mapNodes[layerIndex] = Instantiate(mapNodePrefab);
         parentLayer.mapNodes[layerIndex].transform.parent = parentLayer.transform;
         parentLayer.mapNodes[layerIndex].nodeType = MapNode.NodeType.Shop;
         parentLayer.mapNodes[layerIndex].GetComponent<Renderer>().material.color = shopColor;
+        parentLayer.mapNodes[layerIndex].GetComponent<MapNode>().mapLayer = thisLayer;
     }
 }
