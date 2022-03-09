@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapNode : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class MapNode : MonoBehaviour
 
     private GameObject selectRing;
 
+
+    private GameObject infoCanvas;
+
+    private Text infoText;
+
     public bool isClickable;
 
     public Color oc;
@@ -28,6 +34,11 @@ public class MapNode : MonoBehaviour
         isClickable = false;
         selectRing = gameObject.transform.GetChild(0).gameObject;
         selectRing.SetActive(false);
+        infoCanvas = gameObject.transform.GetChild(1).gameObject;
+        infoText = infoCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        infoCanvas.SetActive(false);
+        //infoText.gameObject.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -64,12 +75,19 @@ public class MapNode : MonoBehaviour
     void OnMouseOver(){
         if(isClickable){
             selectRing.SetActive(true);
+            infoCanvas.SetActive(true);
+            infoText.text = "Big Ship: " + lShips + "\n" + "Mid Ship: " + mShips + "\n" +
+                "Sm Ship: " + sShips;
+
+            //infoText.gameObject.SetActive(true);
         }
     }
 
     void OnMouseExit(){
         if(isClickable){
             selectRing.SetActive(false);
+            infoCanvas.SetActive(false);
+            //infoText.gameObject.SetActive(false);
         }
     }
 }
