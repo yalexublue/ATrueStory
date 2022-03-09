@@ -14,20 +14,54 @@ public class MapNode : MonoBehaviour
     public int sShips;
     public int reward;
 
+    public GameObject selectRing;
+
+    public bool isClickable;
+
+    public Color oc;
+    Renderer r;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        r = gameObject.GetComponent<Renderer>();
+        isClickable = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!isClickable){
+            selectRing.SetActive(false);
+            oc = r.material.GetColor("_Color");
+            oc.a = 0.3f;
+            r.material.SetColor("_Color", oc);
+        }else{
+            oc = r.material.GetColor("_Color");
+            oc.a = 1f;
+            r.material.SetColor("_Color", oc);
+        }
     }
 
     void OnMouseDown(){
         Debug.Log("I HAVE BEEN CLICKED");
+        if(isClickable){
+            GameManager gm = GameObject.FindWithTag("MainCamera").GetComponent<GameManager>();
+            if(!gm.inCombat){
+                gm.NodeClick(this);
+            }
+        }
+    }
+
+    void OnMouseOver(){
+        if(isClickable){
+            selectRing.SetActive(true);
+        }
+    }
+
+    void OnMouseExit(){
+        if(isClickable){
+            selectRing.SetActive(false);
+        }
     }
 }

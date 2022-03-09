@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 136257207429030350}
-  - component: {fileID: 136257207429030351}
+  - component: {fileID: 1139991072}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &136257207429030351
+--- !u!114 &1139991072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,30 +40,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 136257207429030348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b005795a88f743c6b10c0c4c2c9684c, type: 3}
+  m_Script: {fileID: 11500000, guid: 68ce7b3bde6415f4e94228d4ab393f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 7172577835257093819, guid: 9ddbf52ea0f7a4fe1b5cd4e85aa0551c, type: 3}
-  smallShip: {fileID: 0}
-  mediumShip: {fileID: 0}
-  largeShip: {fileID: 0}
+  mapNodePrefab: {fileID: 7579180620685338495, guid: cb958bc74b135f241904ca965a00ea59, type: 3}
   numLayers: 10
-  upStationIndex: 4
-  shopIndex: 5
-  difficultyUpTimes: 2
-  difficultyUpIndex: 
-  maxMapPerLayer: 4
-  minMapPerLayer: 2
-  minLargeShip: 0
-  minMediumShip: 0
-  minSmallShip: 1
-  maxLargeShip: 1
-  maxMediumShip: 2
-  maxSmallShip: 3
-  rewardSmallShip: 100
-  rewardMediumShip: 500
-  rewardLargeShip: 1000
-  randUpStation: 1
-  randShop: 1
-  isShopProbability: 0.2
-  isUpProbability: 0.2
+  upGap: 4
+  minNodesInLayer: 1
+  maxNodesInLayer: 4
+  mapLayers: []
+  shopWeight: 21
+  battleWeight: 57
+  upgradeWeight: 2
+  battleColor: {r: 1, g: 0, b: 0.22423744, a: 0.9019608}
+  upgradeColor: {r: 0.3638364, g: 1, b: 0, a: 0.8}
+  shopColor: {r: 1, g: 0.90058327, b: 0, a: 0.9019608}
+  layerGap: 8
+  difficultyGap: 3
+  smallShipWeight: 35
+  mediumShipWeight: 20
+  largeShipWeight: 6

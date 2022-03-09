@@ -25,6 +25,17 @@ public class MapGenerator : MonoBehaviour
 
     public float layerGap;
 
+    [Header("Battle Node Config")]
+    public int difficultyGap;
+    int sScore = 3;
+    int mScore = 5;
+    int lScore = 9;
+    public float smallShipWeight;
+    public float mediumShipWeight;
+    public float largeShipWeight;
+
+    Vector3[] route;
+
 
     //map generating variables
     int cDifficulty;
@@ -37,6 +48,7 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateMap(){
         mapLayers = new MapLayer[numLayers];
+        cDifficulty = 1;
         for(int i=0; i<numLayers; i++){
             GenerateLayer(i);
         }
@@ -60,8 +72,11 @@ public class MapGenerator : MonoBehaviour
     void GenerateLayer(int l){
         //special overrides
         string lName = "MapLayer" + (l.ToString());
-        mapLayers[l] = (new GameObject(lName, typeof(GameObject), typeof(MapLayer))).GetComponent<MapLayer>();
+        mapLayers[l] = (new GameObject(lName, typeof(MapLayer))).GetComponent<MapLayer>();
         mapLayers[l].transform.parent = transform;
+        if(l % difficultyGap == 0){
+            cDifficulty ++;
+        }
         if(l % upGap == 0 && l!=0){
             //is a single upgrade station
             mapLayers[l].mapNodes = new MapNode[1];
@@ -102,6 +117,24 @@ public class MapGenerator : MonoBehaviour
         parentLayer.mapNodes[layerIndex].transform.parent = parentLayer.transform;
         parentLayer.mapNodes[layerIndex].nodeType = MapNode.NodeType.Battle;
         parentLayer.mapNodes[layerIndex].GetComponent<Renderer>().material.color = battleColor;
+        
+        int battleScore = 0;
+        int targetScore = Mathf.FloorToInt(cDifficulty * 4.5f);
+        print("generating " + cDifficulty.ToString());
+        float gentotal = smallShipWeight + mediumShipWeight + largeShipWeight;
+        while(battleScore < targetScore){
+            float typeGen = Random.Range(0f, gentotal);
+            if(typeGen < smallShipWeight){
+                parentLayer.mapNodes[layerIndex].sShips++;
+                battleScore += sScore;
+            }else if(typeGen < smallShipWeight + mediumShipWeight){
+                parentLayer.mapNodes[layerIndex].mShips++;
+                battleScore += mScore;
+            }else{
+                parentLayer.mapNodes[layerIndex].lShips++;
+                battleScore += lScore;
+            }
+        }
     }
     void GenerateShopNode(MapLayer parentLayer, int layerIndex){
         parentLayer.mapNodes[layerIndex] = Instantiate(mapNodePrefab);

@@ -28,7 +28,7 @@ public class Ship : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitCombat();
+        //InitCombat();
         //tr.time = otime;
     }
 
