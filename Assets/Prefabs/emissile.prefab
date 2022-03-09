@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2192335073199254531}
   m_Layer: 0
   m_Name: emissile
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   angleSpeed: 8
   moveSpeed: 35
   epsilon: 2
-  damage: 4
+  damage: 3
 --- !u!96 &2192335073199254531
 TrailRenderer:
   serializedVersion: 2

@@ -80,8 +80,8 @@ MonoBehaviour:
   hitpoints: 120
   cHitpoints: 120
   team: 1
-  movementType: 1
-  angleSpeedRange: {x: 0, y: 0}
+  movementType: 0
+  angleSpeedRange: {x: 0.55, y: 1}
   turnSpeed: {x: 1, y: 4.5}
   moveSpeed: 14
   moveRadiusRange: {x: 20, y: 30}

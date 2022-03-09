@@ -28,14 +28,11 @@ public class MapGenerator : MonoBehaviour
     [Header("Battle Node Config")]
     public int difficultyGap;
     int sScore = 3;
-    int mScore = 5;
-    int lScore = 9;
+    int mScore = 4;
+    int lScore = 7;
     public float smallShipWeight;
     public float mediumShipWeight;
     public float largeShipWeight;
-
-    Vector3[] route;
-
 
     //map generating variables
     int cDifficulty;
@@ -61,6 +58,7 @@ public class MapGenerator : MonoBehaviour
             startingy += 3.75f * (mapLayers[j].mapNodes.Length - 1) + (Random.Range(-0.5f, 0.5f));
             layerPos.y = startingy;
             mapLayers[j].transform.localPosition = Vector3.zero;
+            cDifficulty=1;
             for(int k=0; k<mapLayers[j].mapNodes.Length; k++){
                 layerPos.x = startingx + Random.Range(-layerGap/5, layerGap/5);
                 layerPos.y -= Random.Range(5f, 10f);
@@ -74,7 +72,7 @@ public class MapGenerator : MonoBehaviour
         string lName = "MapLayer" + (l.ToString());
         mapLayers[l] = (new GameObject(lName, typeof(MapLayer))).GetComponent<MapLayer>();
         mapLayers[l].transform.parent = transform;
-        if(l % difficultyGap == 0){
+        if(l % difficultyGap == 0 && l!=0){
             cDifficulty ++;
         }
         if(l % upGap == 0 && l!=0){
@@ -121,7 +119,7 @@ public class MapGenerator : MonoBehaviour
         parentLayer.mapNodes[layerIndex].GetComponent<MapNode>().mapLayer = thisLayer;
         
         int battleScore = 0;
-        int targetScore = Mathf.FloorToInt(cDifficulty * 4.5f);
+        int targetScore = Mathf.FloorToInt(cDifficulty * 5f);
         print("generating " + cDifficulty.ToString());
         float gentotal = smallShipWeight + mediumShipWeight + largeShipWeight;
         while(battleScore < targetScore){

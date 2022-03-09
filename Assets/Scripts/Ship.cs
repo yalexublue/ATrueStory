@@ -21,9 +21,12 @@ public class Ship : MonoBehaviour
     public Ship target;
 
     public GameObject[] explosions;
+    
 
     TrailRenderer tr;
     float otime;
+
+    Vector2 yBounds = new Vector2(-20, 20);
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class Ship : MonoBehaviour
         //tr.time = otime;
     }
 
-    void InitCombat(){
+    public void InitCombat(){
         tr = GetComponent<TrailRenderer>();
         otime = tr.time;
         tr.time = 0;
@@ -87,6 +90,16 @@ public class Ship : MonoBehaviour
 
             transform.Translate(0, 0, moveSpeed * Time.deltaTime);
         }
+        
+        if(transform.position.y > yBounds.y){
+            Vector3 ny = transform.position;
+            ny.y = yBounds.y;
+            transform.position = ny;
+        }else if(transform.position.y < yBounds.x){
+            Vector3 ny = transform.position;
+            ny.y = yBounds.x;
+            transform.position = ny;
+        }
     }
 
     int GetNewTarget(){
@@ -127,13 +140,16 @@ public class Ship : MonoBehaviour
         foreach(GameObject g in explosions){
             Instantiate(g, transform.position, transform.rotation);
         }
+        if(gameObject.tag == "Enemy"){
+            GameObject.FindObjectsOfType<GameManager>()[0].GetComponent<GameManager>().EnemyDeath();
+        }
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
 
     public void DealDamage(int d){
-        hitpoints -= d;
-        if(hitpoints <= 0){
+        cHitpoints -= d;
+        if(cHitpoints <= 0){
             Die();
         }
     }

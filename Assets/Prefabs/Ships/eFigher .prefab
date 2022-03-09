@@ -108,7 +108,7 @@ MonoBehaviour:
   firePoints:
   - {fileID: 5762458629114729452}
   color: {r: 1, g: 0, b: 0.34887505, a: 1}
-  damage: 8
+  damage: 6
 --- !u!96 &5762458629274924560
 TrailRenderer:
   serializedVersion: 2

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ce7b3bde6415f4e94228d4ab393f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapNodePrefab: {fileID: 7579180620685338495, guid: cb958bc74b135f241904ca965a00ea59, type: 3}
+  mapNodePrefab: {fileID: 2457905868869713315, guid: 5d6c50afb823b62489fdca4f4b2be793, type: 3}
   numLayers: 10
   upGap: 4
   minNodesInLayer: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
   battleColor: {r: 1, g: 0, b: 0.22423744, a: 0.9019608}
   upgradeColor: {r: 0.3638364, g: 1, b: 0, a: 0.8}
   shopColor: {r: 1, g: 0.90058327, b: 0, a: 0.9019608}
-  layerGap: 8
+  layerGap: 8.6
   difficultyGap: 3
   smallShipWeight: 35
   mediumShipWeight: 20

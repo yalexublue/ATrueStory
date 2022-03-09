@@ -51,9 +51,10 @@ public class MapNode : MonoBehaviour
     }
 
     void OnMouseDown(){
-        Debug.Log("I HAVE BEEN CLICKED");
         if(isClickable){
-            GameManager gm = GameObject.FindWithTag("MainCamera").GetComponent<GameManager>();
+            Debug.Log("I HAVE BEEN CLICKED");
+            GameManager gm = GameObject.FindObjectsOfType<GameManager>()[0].GetComponent<GameManager>();
+            print(gm.name);
             if(!gm.inCombat){
                 gm.NodeClick(this);
             }
